@@ -4,13 +4,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="tasks")
 public class Task {
 
 	@Id
@@ -23,6 +26,13 @@ public class Task {
 	
 	@Column
 	private Date beginDate;
+	
+	@Column
+	private Date closedDate;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_task_status")
+	private TaskStatus status;
 
 	public String getName() {
 		return this.name;
@@ -46,6 +56,22 @@ public class Task {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public TaskStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(TaskStatus status) {
+		this.status = status;
+	}
+
+	public Date getClosedDate() {
+		return closedDate;
+	}
+
+	public void setClosedDate(Date closedDate) {
+		this.closedDate = closedDate;
 	}
 
 }
