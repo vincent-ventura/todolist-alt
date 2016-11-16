@@ -8,37 +8,29 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tasks_status")
-public class TaskStatus {
+@Table(name = "users")
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_task_status")
-	private int id;
+	@Column(name = "id_user")
+	private long id;
 	
 	@Column
 	private String name;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_task_status")
-	private List<Task> tasks;
+	@OneToMany(fetch=FetchType.LAZY)
+    private List<TaskOwner> taskOwners;
 
-	public TaskStatus(int id) {
-		this.id = id;
-	}
-	
-	public TaskStatus() {}
-
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -50,11 +42,12 @@ public class TaskStatus {
 		this.name = name;
 	}
 
-	public List<Task> getTasks() {
-		return tasks;
+	public List<TaskOwner> getTaskOwners() {
+		return taskOwners;
 	}
 
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
+	public void setTaskOwners(List<TaskOwner> taskOwners) {
+		this.taskOwners = taskOwners;
 	}
+
 }

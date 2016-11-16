@@ -46,6 +46,11 @@
 				<artifactId>todolist-persistence</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>todolist-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<!-- JUNIT -->
 			<dependency>
 				<groupId>junit</groupId>
@@ -154,6 +159,29 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
 				<version>${spring.framework.version}</version>
+			</dependency>
+			<!-- SPRING MVC -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.framework.version}</version>
+			</dependency>
+			<!-- Servlet -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>1.1.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
