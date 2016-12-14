@@ -50,5 +50,15 @@ public class TodolistServiceTest extends AbstractServiceTest {
 	public void testAcceptDelegatedTask() {
 		assertEquals(todolistService.acceptDelegatedTask(DELEGATED_TASK_ID, DELEGATE_USER_ID).getStatus().getId(), TaskStatusEnum.DELEGATED.getValue());
 	}
+	
+	@Test
+	public void testAddTaskWorks() {
+		assertTrue(todolistService.addTask("taskName", 1).getId() > 0);
+	}
+	
+	@Test
+	public void testListTaskStatus() {
+		assertTrue(CollectionUtils.isNotEmpty(todolistService.listTaskStatus()));
+	}
 
 }

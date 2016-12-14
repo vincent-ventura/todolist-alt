@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.icdc.dei.todolist.persistence.dao.TaskDao;
 import fr.icdc.dei.todolist.persistence.dao.TaskOwnerDao;
+import fr.icdc.dei.todolist.persistence.dao.TaskStatusDao;
 import fr.icdc.dei.todolist.persistence.dao.UserDao;
 import fr.icdc.dei.todolist.persistence.entity.Task;
 import fr.icdc.dei.todolist.persistence.entity.TaskOwner;
@@ -27,6 +28,9 @@ public class TodolistServiceImpl implements TodolistService {
 	
 	@Autowired
 	private TaskDao taskDao;
+	
+	@Autowired
+	private TaskStatusDao taskStatusDao;
 	
 	@Autowired
 	private TaskOwnerDao taskOwnerDao;
@@ -66,5 +70,16 @@ public class TodolistServiceImpl implements TodolistService {
 	@Override
 	public List<Task> listTasks() {
 		return taskDao.findAll();
+	}
+
+	@Override
+	public Task addTask(String taskName, int statusId) {
+		return taskDao.save(new Task(taskName, statusId));
+		
+	}
+
+	@Override
+	public List<TaskStatus> listTaskStatus() {
+		return taskStatusDao.findAll();
 	}
 }

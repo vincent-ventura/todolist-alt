@@ -39,6 +39,15 @@ public class Task {
 	@OneToMany
     private List<TaskOwner> taskOwners;
 
+	public Task(String taskName, int statusId) {
+		this.name = taskName;
+		this.beginDate = new Date();
+		this.closedDate = new Date();
+		this.status = new TaskStatus(statusId);
+	}
+	
+	public Task() {}
+
 	public String getName() {
 		return this.name;
 	}
