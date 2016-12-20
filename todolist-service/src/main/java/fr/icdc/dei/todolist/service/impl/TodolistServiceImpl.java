@@ -1,13 +1,16 @@
 package fr.icdc.dei.todolist.service.impl;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.icdc.dei.todolist.commons.utils.DateUtils;
 import fr.icdc.dei.todolist.persistence.dao.TaskDao;
 import fr.icdc.dei.todolist.persistence.dao.TaskOwnerDao;
 import fr.icdc.dei.todolist.persistence.dao.TaskStatusDao;
@@ -69,17 +72,36 @@ public class TodolistServiceImpl implements TodolistService {
 
 	@Override
 	public List<Task> listTasks() {
-		return taskDao.findAll();
+		return taskDao.findAll().stream()
+				.sorted( (t1, t2) -> Long.compare(t1.getStatus().getId(), t2.getStatus().getId()) )
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public Task addTask(String taskName, int statusId) {
 		return taskDao.save(new Task(taskName, statusId));
-		
+	}
+	
+	@Override
+	public Task addTask(String taskName, Date taskBeginDate, int statusId) {
+		return taskDao.save(new Task(taskName, taskBeginDate, statusId));
 	}
 
 	@Override
 	public List<TaskStatus> listTaskStatus() {
 		return taskStatusDao.findAll();
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	@Override
+	public Task terminateTask(long taskId) {
+		Task task = taskDao.findOne(taskId);
+		Date oneWeekAgoDate = DateUtils.oneWeekAgoDate();
+		if (task.getBeginDate().compareTo(oneWeekAgoDate) == -1) {
+			task.setStatus(new TaskStatus(TaskStatusEnum.FINISHED.getValue()));
+			task.setClosedDate(new Date());
+			task = taskDao.save(task);
+		}		
+		return task;
 	}
 }

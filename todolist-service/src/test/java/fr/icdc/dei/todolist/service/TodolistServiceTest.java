@@ -18,6 +18,7 @@ public class TodolistServiceTest extends AbstractServiceTest {
 	private static final long DELEGATED_TASK_ID = 2L;
 	private static final long USER_ID = 1L;
 	private static final long DELEGATE_USER_ID = 2L;
+	private static final long CREATED_TASK_MORE_THAN_ONE_WEEK_AGO_ID = 4L;
 	
 	private static User user = new User();
 	private static Task task = new Task();
@@ -59,6 +60,11 @@ public class TodolistServiceTest extends AbstractServiceTest {
 	@Test
 	public void testListTaskStatus() {
 		assertTrue(CollectionUtils.isNotEmpty(todolistService.listTaskStatus()));
+	}
+	
+	@Test
+	public void testTerminateTaskCreatedMoreThanOneWeekAgo() {
+		assertEquals(todolistService.terminateTask(CREATED_TASK_MORE_THAN_ONE_WEEK_AGO_ID).getStatus().getId(), TaskStatusEnum.FINISHED.getValue());
 	}
 
 }

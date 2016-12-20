@@ -12,5 +12,9 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>todolist-persistence</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>todolist-commons</artifactId>
+		</dependency>
 	</dependencies>
 </project>

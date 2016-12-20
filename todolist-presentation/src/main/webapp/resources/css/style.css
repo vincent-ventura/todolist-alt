@@ -1,0 +1,34 @@
+body {
+	margin: 10%;
+}
+
+table, form {
+	margin-top: 10px;
+}
+
+i.terminate {
+	font-size: 40px;
+	color: green;
+}
+
+input[name="taskBeginDate"]:focus.invalid~label:after,
+input[name="taskBeginDate"].invalid~label:after,
+input[name="taskName"]:focus.invalid~label:after,
+input[name="taskName"].invalid~label:after {
+  content: attr(data-error);
+  color: #F44336;
+  opacity: 1;
+}
+
+input[name="taskBeginDate"]:focus~label:after,
+input[name="taskBeginDate"]~label:after,
+input[name="taskName"]:focus~label:after,
+input[name="taskName"]~label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 36px;
+  opacity: 0;
+  white-space: pre;
+  transition: .2s opacity ease-out, .2s color ease-out;
+}

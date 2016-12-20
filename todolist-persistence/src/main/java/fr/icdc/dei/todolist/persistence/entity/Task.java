@@ -42,7 +42,14 @@ public class Task {
 	public Task(String taskName, int statusId) {
 		this.name = taskName;
 		this.beginDate = new Date();
-		this.closedDate = new Date();
+		this.closedDate = new Date();;
+		this.status = new TaskStatus(statusId);
+	}
+	
+	public Task(String taskName, Date taskBeginDate, int statusId) {
+		this.name = taskName;
+		this.beginDate = taskBeginDate;
+		this.closedDate = taskBeginDate;
 		this.status = new TaskStatus(statusId);
 	}
 	
